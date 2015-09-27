@@ -23,7 +23,7 @@ type Mutex struct {
 
 // Lock locks m.
 // If the lock is already in use, the calling goroutine repetitively tries to
-// acquire the the mutex until it is available (busy waiting).
+// acquire the lock until it is available (busy waiting).
 func (m *Mutex) Lock() {
 	for !atomic.CompareAndSwapInt32(&m.state, mutexUnlocked, mutexLocked) {
 		runtime.Gosched()
